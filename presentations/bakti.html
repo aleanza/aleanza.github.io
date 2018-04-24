@@ -63,7 +63,7 @@
 <h3>Agenda</h3>
 <ol>
 <li>Anforderungen</li>
-<li>Framework <em>tibatec</em> (<a href="https://www.tibatec.net/">TiBaTech</a>)</li>
+<li>Framework <em>tibatec</em> (<a href="https://www.tibatec.net/">tibatec</a>)</li>
 <li>Framework <em>iLAB-Software-Framework</em> (<a href="https://www.infoteam.de/life-science/laborautomation/ilab-software-framework-basis-fuer-intelligente-laborautomatisierung/">Infotech</a>)</li>
 <li>Empfehlung</li>
 </ol>
@@ -78,7 +78,7 @@
 <img src="images/fast.jpg" style="background: transparent; border-style: none;"  width=400 /> 
 <ul>
 <li>Jeder Datenzugriff dauert nicht länger als <em>1 Sekunde</em></li>
-<li>Schnelle Interaktion mit Benutzer <br />(z.B. Tastatur-Bedienung)</li>
+<li>Schnelle Interaktion mit Benutzer <br />(z.B. auch über die Tastatur-Bedienung)</li>
 </ul>
 </section>
 <section >
@@ -92,7 +92,7 @@
 </section>
 <section >
 <h3>Skalierbarkeit</h3>
-<img src="images/scalability.png" style="background: transparent; border-style: none;"  width=500 />
+<img src="images/scalability.png" style="background: transparent; border-style: none; box-shadow: none;"  width=500 />
 <ul>
 <li>200 User</li>
 <li>Viele parallele Anfragen</li>
@@ -143,9 +143,9 @@
 <img src="images/misc.jpg" style="background: transparent; border-style: none;"  width=500 />
 <ul>
 <li>Responsiveness - z.B. Tablet-App</li>
-<li>Widgtet-Konzept</li>
-<li>Validierte Umgebung, Zurückgreifen auf Business Know-How -&gt; <strong><em>Einsatz von Frameworks</em></strong></li>
-<li>...</li>
+<li>Widget-Konzept</li>
+<li>Innovation: State-of-the-Art Toolchain</li>
+<li>Validierte Umgebung, Zurückgreifen auf Business Know-How -&gt; <strong><em>Einsatz von Frameworks</em></strong> ...</li>
 </ul>
 </section>
 </section>
@@ -232,7 +232,7 @@ Diverse Nicht-Funktionale Anforderungen können nicht direkt abgedeckt werden
 </ul>
 </li>
 <li>"Klassischer", zuwenig massgeschneiderter Architektur-Ansatz</li>
-<li>"Generische" Natur des Frameworks bedingt grosser Aufwand für Anpassungen an Medica</li>
+<li>"Generische" Natur des Frameworks bedingt grosser Aufwand für Anpassungen an medica</li>
 </ul>
 <p><strong><em>-&gt; Nicht empfohlen</em></strong></p>
 </section>
@@ -290,6 +290,36 @@ Diverse Nicht-Funktionale Anforderungen können nicht direkt abgedeckt werden
 <h3>GUI basierend auf Web-Technologien</h3>
 <img src="images/webUi.png" style="background: transparent; border: none;" width=700 />
 <p><strong><em> -&gt; Portierbarkeit, Responsiveness </em></strong></p>
+</section>
+<section >
+<h4>Gegenüberstellung Desktop- vs. Web-Technologien</h4>
+<style>
+table {font-size: 70% !important;}
+td {vertical-align:middle !important; }
+</style> 
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="center"><p>Vorteile</p></th>
+<th align="center"><p>Nachteile</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><p><strong>Desktop</strong></p></td>
+<td align="center"><ul><li>Performance</li><li>Direkter Zugriff auf Computer Resourcen</li></ul></td>
+<td align="center"><ul><li>Schwierigeres Deployment</li><li>Aufwand gross für Custom-Elemente</li><li>Nicht portabel</li></ul></td>
+</tr>
+<tr class="even">
+<td align="left"><p><strong>Web</strong></p></td>
+<td align="center"><ul><li>Einfacheres Deployment</li><li>Portabel</li><li>Responsive</li><li>Aufwand klein für Custom-Elemente</li><li>Standards</li><li>Grosse Community</li></ul></td>
+<td align="center"><ul><li>Auf Javascript basierend</li><li>Zugriff auf FS nur über electron.io</li><li>Weniger Kontrolle auf Computer-Resourcen (VM)</li></ul></td>
+</tr>
+</tbody>
+</table>
+
+<p><a href="http://blackthorn-vision.com/what-is-the-future-of-the-desktop-development-for-windows-2/">What is the future of the desktop development for Windows</a></p>
 </section>
 </section>
 <section >
