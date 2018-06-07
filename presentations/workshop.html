@@ -1,0 +1,185 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>medica "Workshop 2"</title>
+    <meta name="description" content="Workshop 2">
+    <meta name="author" content="Antonino Leanza">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="//code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="//code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+    <link type="text/css" rel="stylesheet" href="fsharp.formatting/styles/style.css" />
+    <link type="text/css" rel="stylesheet" href="fsharp.formatting/styles/deedle.css" />
+    <link type="text/css" rel="stylesheet" href="css/custom.css" />
+    <script src="fsharp.formatting/styles/tips.js" type="text/javascript"></script>
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="css/fsreveal.css">
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <script language="javascript" type="text/javascript">
+        function init()
+        {
+            websocket = new WebSocket("ws://"+window.location.host+"/websocket");
+            websocket.onmessage = function(evt) { location.reload(); };
+        }
+        window.addEventListener("load", init, false);
+    </script>
+</head>
+<body>
+    <div class="reveal">
+        
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <section >
+<h2>medica <strong><em>Workshop</em></strong></h2>
+<img src="images/workshop.jpg" style="background: transparent; border-style: none;"  width=500 />
+<br />
+<h3>Teil 2</h3>
+<p><em>bbv Software Services AG</em></p>
+<p>Antonino Leanza &amp; Florian Bucher</p>
+</section>
+<section >
+<h3>Ziel: DevOps anwenden können</h3>
+<img src="images/bericht-tabellarisch.jpg" style="background: transparent; border-style: none;"  width=300 />
+<ol>
+<li>Source Verwaltung mit Git anwenden können</li>
+<li>CI/CD definieren in Visual Studio Team Services (VSTS)</li>
+<li>Software Entwicklungsprozess mit VSTS abbilden</li>
+</ol>
+</section>
+<section >
+<section >
+<h2>SCM mit Git</h2>
+<ol>
+<li>Theorie</li>
+<li>Praxis</li>
+</ol>
+</section>
+<section >
+<h3>Warum SCM?</h3>
+<img src="images/scm.png" style="background: transparent; border-style: none;"  width=300 />
+</section>
+<section >
+<h3>Warum Git?</h3>
+<img src="images/whygit.png" style="background: transparent; border-style: none;"  width=1000 /> 
+</section>
+<section >
+<h3>Branching Strategie: GitFlow</h3>
+<img src="images/GitFlowFeatureBranches.png" style="background: transparent; border-style: none;"  width=500 /> 
+</section>
+<section >
+<img src="images/GitFlowDevelopBranch.png" style="background: transparent; border-style: none;"  width=500 />
+</section>
+<section >
+<img src="images/GitFlowReleaseBranch.png" style="background: transparent; border-style: none;"  width=500 />
+</section>
+<section >
+<img src="images/GitFlowMasterBranch.png" style="background: transparent; border-style: none;"  width=500 />
+</section>
+<section >
+<img src="images/GitFlowHotfixBranch.png" style="background: transparent; border-style: none;"  width=500 />
+</section>
+<section >
+<h2>SCM mit Git - Praxis</h2>
+<ol>
+<li>Pull / Push</li>
+<li>Branch / Merge</li>
+<li>
+Anbindungen in...
+<ul>
+<li>VSTS</li>
+<li>Visual Studio</li>
+<li>Git Extensions</li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<section >
+<h3>CI/CD definieren in VSTS</h3>
+<p>... in der Praxis</p>
+<ol>
+<li>Continuous Integration - Build Definition erstellen</li>
+<li>Continuous Integration - mit/ohne Unit Tests</li>
+<li>Continuous Deployment und das Release Management</li>
+</ol>
+</section>
+<section >
+<h3>Software Entwicklungsprozess mit VSTS abbilden</h3>
+<ol>
+<li>Planerische Artefakte: Features / User Stories / Tasks</li>
+<li>Boards</li>
+<li>
+Rückverfolgbarkeit...
+<ul>
+<li>Vernküpfen von Work Items mit Commits</li>
+<li>Branch aus Task erstellen</li>
+</ul>
+</li>
+</ol>
+</section>
+<section >
+<h3>Quellen</h3>
+<ul>
+<li><a href="http://datasift.github.io/gitflow/IntroducingGitFlow.html">Introducing Git Flow</a></li>
+<li><a href="https://nvie.com/">nvie.com</a></li>
+</ul>
+</section>
+
+
+        </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+        // Add the nohighlight class and data-noescape attribute to code elements that have already been formatted by FSharp.Formatting
+        $('pre.highlighted code').addClass('nohighlight').attr('data-noescape', '');
+
+        // Full list of configuration options available here:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+
+            transition: 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+            // Parallax scrolling
+            // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+            // parallaxBackgroundSize: '2100px 900px',
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+                { src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true, condition: function () { return !!document.body.classList; } },
+                { src: 'plugin/notes/notes.js', async: true, condition: function () { return !!document.body.classList; } }
+            ]
+        });
+
+    </script>
+</body>
+</html>
+
