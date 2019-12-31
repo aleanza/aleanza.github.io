@@ -1,0 +1,152 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Notejam</title>
+    <meta name="description" content="Assignment for Technical Review (Nordcloud)">
+    <meta name="author" content="Antonino Leanza">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="//code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="//code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/nordcloud.css" id="theme">
+    <link type="text/css" rel="stylesheet" href="fsharp.formatting/styles/style.css" />
+    <link type="text/css" rel="stylesheet" href="fsharp.formatting/styles/deedle.css" />
+    <link type="text/css" rel="stylesheet" href="css/custom.css" />
+    <script src="fsharp.formatting/styles/tips.js" type="text/javascript"></script>
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="css/fsreveal.css">
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <script language="javascript" type="text/javascript">
+        function init()
+        {
+            websocket = new WebSocket("ws://"+window.location.host+"/websocket");
+            websocket.onmessage = function(evt) { location.reload(); };
+        }
+        window.addEventListener("load", init, false);
+    </script>
+</head>
+<body>
+    <div class="reveal">
+        
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <section >
+<section >
+<img src="./images/notejam/assignment.png" alt="Assignement" style="width:1000px;">  
+</section>
+<section >
+<h3>Scenario</h3>
+<p>The customer asks you to create a <a>pilot</a> for one of the company’s applications in public cloud.
+This is their <a>first attempt</a> to getting to know with <a>non-on-prem environments</a></p>
+</section>
+<section >
+<h3>Tasks for this assignment</h3>
+<ol>
+<li><a>Deliver</a> the solution on a public cloud platform</li>
+<li><a>Present</a> and highlight core concepts and benefits of the designed architecture.</li>
+</ol>
+</section>
+</section>
+<section >
+<section >
+<h3>Actual Architecture</h3>
+<img src="./images/notejam/statusquo.png" alt="Actual Architecture" style="width:1000px;"> 
+<ul>
+<li>Monolithic</li>
+<li>Pros: Easy to develop and deploy</li>
+<li>Cons: Not scalable, high coupling of modules, hard to develop by large team, hard to extend</li>
+</ul>
+</section>
+<section >
+<h3>Actual Solution</h3>
+<ul>
+<li>Available in a variety of web frameworks as a <a href="https://github.com/nordcloud/notejam">GIT repo</a></li>
+<li>e.g. in <a href="https://palletsprojects.com/p/flask/">Flask</a>, a popular Python web application framework</li>
+</ul>
+</section>
+</section>
+<section >
+<section >
+<h3>Business Requirements</h3>
+<ol>
+<li><a>Scalability:</a> The Application must serve variable amount of traffic</li>
+<li><a>Recoverability:</a> Preserve the notes up to 3 years, being able to recover them it if needed</li>
+<li><a>Resiliency:</a> in case of datacenter failures, recovery to any regions supported by the cloud provider</li>
+<li><a>Resiliency:</a> Concurrent development / deployment by a team of &gt; 100 developers</li>
+<li>
+Support of development process by use of separated environments (development,
+testing, production)
+</li>
+<li>Monitoring of relevant metrics and logs from the infrastructure for quality assurance and security purposes.</li>
+</ol>
+</section>
+<section >
+<h3>Quality Characteristics</h3>
+<a href="https://iso25000.com/index.php/en/iso-25000-standards/iso-25010">
+<img src="./images/notejam/notejam-Quality.png" alt="Quality" style="border: none; background-color:transparent; width: 1000px;">
+</a>
+<p><a href="https://docs.microsoft.com/en-us/azure/architecture/patterns/">https://docs.microsoft.com/en-us/azure/architecture/patterns/</a></p>
+</section>
+</section>
+<section >
+<h3>Roadmap</h3>
+<img src="./images/notejam/notejam-Roadmap.png" alt="Roadmap" style="border: none; background-color:transparent; width: 1000px;">
+</section>
+
+
+        </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+        // Add the nohighlight class and data-noescape attribute to code elements that have already been formatted by FSharp.Formatting
+        $('pre.highlighted code').addClass('nohighlight').attr('data-noescape', '');
+
+        // Full list of configuration options available here:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+
+            transition: 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+            // Parallax scrolling
+            // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+            // parallaxBackgroundSize: '2100px 900px',
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+                { src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true, condition: function () { return !!document.body.classList; } },
+                { src: 'plugin/notes/notes.js', async: true, condition: function () { return !!document.body.classList; } }
+            ]
+        });
+
+    </script>
+</body>
+</html>
+
