@@ -51,7 +51,7 @@
         <div class="slides">
             <section >
 <section >
-<img src="./images/notejam/assignment.png" alt="Assignement" style="width:1000px;">  
+<img src="./images/notejam/assignment.png" alt="Assignment" style="width:1000px;">  
 </section>
 <section >
 <h3>Scenario</h3>
@@ -68,12 +68,22 @@ This is their <a>first attempt</a> to getting to know with <a>non-on-prem enviro
 </section>
 <section >
 <section >
-<h3>Actual Architecture</h3>
+<h3>Actual Architecture: Monolithic</h3>
 <img src="./images/notejam/statusquo.png" alt="Actual Architecture" style="width:1000px;"> 
 <ul>
-<li>Monolithic</li>
-<li>Pros: Easy to develop and deploy</li>
-<li>Cons: Not scalable, high coupling of modules, hard to develop by large team, hard to extend</li>
+<li>
+Pros
+<ul>
+<li>Easy to develop and deploy</li>
+</ul>
+</li>
+<li>
+Cons
+<ul>
+<li>Not truely scalable</li>
+<li>Hard to develop by a large team</li>
+</ul>
+</li>
 </ul>
 </section>
 <section >
@@ -85,18 +95,25 @@ This is their <a>first attempt</a> to getting to know with <a>non-on-prem enviro
 </section>
 </section>
 <section >
-<section >
 <h3>Business Requirements</h3>
 <ol>
 <li><a>Scalability:</a> The Application must serve variable amount of traffic</li>
-<li><a>Recoverability:</a> Preserve the notes up to 3 years, being able to recover them it if needed</li>
 <li><a>Resiliency:</a> in case of datacenter failures, recovery to any regions supported by the cloud provider</li>
-<li><a>Resiliency:</a> Concurrent development / deployment by a team of &gt; 100 developers</li>
+<li><a>Modifiability:</a> Concurrent development / deployment by a team of &gt; 100 developers</li>
 <li>
-Support of development process by use of separated environments (development,
+<a>Installability:</a>Support of development process by use of separated environments (development,
 testing, production)
 </li>
-<li>Monitoring of relevant metrics and logs from the infrastructure for quality assurance and security purposes.</li>
+<li><a>Analysability :</a> Monitoring of relevant metrics and logs from the infrastructure for quality assurance and security purposes.</li>
+</ol>
+</section>
+<section >
+<section >
+<h3>Additionally Identified Business Requirements</h3>
+<ol>
+<li><a>Confidentiality:</a> Every user should only see its notes.</li>
+<li><a>Testability:</a> The correct functionality should be asserted on different levels (From component to system level).</li>
+<li>Not clear: "Preserve the notes up to 3 years, being able to recover them it if needed" (What means "recover"? Is it an archiving functionality?)</li>
 </ol>
 </section>
 <section >
@@ -104,12 +121,119 @@ testing, production)
 <a href="https://iso25000.com/index.php/en/iso-25000-standards/iso-25010">
 <img src="./images/notejam/notejam-Quality.png" alt="Quality" style="border: none; background-color:transparent; width: 1000px;">
 </a>
-<p><a href="https://docs.microsoft.com/en-us/azure/architecture/patterns/">https://docs.microsoft.com/en-us/azure/architecture/patterns/</a></p>
 </section>
 </section>
 <section >
 <h3>Roadmap</h3>
 <img src="./images/notejam/notejam-Roadmap.png" alt="Roadmap" style="border: none; background-color:transparent; width: 1000px;">
+</section>
+<section >
+<h3>Support for Python 3</h3>
+<ul>
+<li>All relevant modules where ported</li>
+<li><a href="https://github.com/komarserjio/notejam/pull/97">PR</a> was created</li>
+</ul>
+</section>
+<section >
+<h3>Explore Present and Needed Capabilities</h3>
+<ul>
+<li>Assumption: The <a href="#/2">Business Requirements</a> are complete</li>
+<li><a href="http://127.0.0.1:5000/signin/?next=%2F">Local deployment of the present solution</a> for exploring and finding gaps</li>
+</ul>
+</section>
+<section >
+<section >
+<h3>Architecture</h3>
+<img src="./images/notejam/notejam-Architecture.png" alt="Quality" style="border: none; background-color:transparent; width: 1000px;">
+</section>
+<section >
+<h3>Components</h3>
+<ul>
+<li>
+AAD B2C
+<ul>
+<li>Directory service that leverages identity stores outside of your company.</li>
+<li>Authentication service</li>
+<li>Alternative to the burden of having to manage authentication and account details yourself</li>
+</ul>
+</li>
+<li>
+Azure Application Gateway
+<ul>
+<li>Web traffic load balancer</li>
+<li>Routing</li>
+<li>SSL/TLS termination</li>
+<li>WAF (centralized protection of your web applications from common exploits and vulnerabilities)</li>
+</ul>
+</li>
+<li>Azure Application Service with autoscaling capabilities (stateless)</li>
+<li>Cosmos DB (no need for transformations or complex object to relational mapping layer, thus promoting rapid development, designed for multi-tenancy)</li>
+</ul>
+</section>
+<section >
+<h3>Disaster Recovery</h3>
+<ul>
+<li>For DR use a smaller tier App Service plan configured in the secondary region, which autoscales when a failover occurs (Configuration in the Application Gateway).</li>
+<li>Define recovery time objective (RTO), the time required for an application to fully recover.</li>
+<li>Define recovery point objective (RPO), which is the maximum period of recent data updates the application can tolerate losing when recovering after a disruptive event (the time period of updates that you might afford to lose).</li>
+<li>This has a direct impact on the <a href="https://docs.microsoft.com/en-us/azure/cosmos-db/consistency-levels">consistency level and replication mode</a></li>
+</ul>
+</section>
+<section >
+<h3>Pendants to Azure Components</h3>
+<p>As an alternative to the Azure Solution, also Linux-Container-Based Solution can be used (and deployed to Azure).</p>
+<ul>
+<li>Load Blancer/Reverse Proxy: NGINX is a free, open-source, high-performance HTTP server and reverse proxy, as well as an IMAP/POP3 proxy server. NGINX is known for its high performance, stability, rich feature set, simple configuration, and low resource consumption. It forwards the requests to the application server.</li>
+<li><p>Application Server: Unicorn is a WSGI server that handles HTTP requests and routes them to any python application that is <a href="https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface">WSGI</a>-compliant, such as Flask.</p></li>
+</ul>
+</section>
+</section>
+<section >
+<h3>PoC (only the first step...)</h3>
+<p><a href="https://notejamazure.azurewebsites.net">NoteJam on Azure</a>
+Deployed by a three-line script:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="i">az</span> <span class="i">group</span> <span class="i">create</span> <span class="o">..</span><span class="o">.</span>
+<span class="i">az</span> <span class="i">appservice</span> <span class="i">plan</span> <span class="i">create</span> <span class="o">..</span><span class="o">.</span>
+<span class="i">az</span> <span class="i">webapp</span> <span class="i">create</span> <span class="o">..</span><span class="o">.</span>
+</code></pre></td>
+</tr>
+</table>
+<p>or a single, less customizable command...</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="i">az</span> <span class="i">webapp</span> <span class="i">up</span> <span class="o">..</span><span class="o">.</span>
+</code></pre></td>
+</tr>
+</table>
+<p>Good basis for further refactoring, building CI/CD Pipeline, etc.</p>
+</section>
+<section data-background="images/notejam/notejam-Architecture.png">
+<h3><span style="color:black">Discussion</span></h3>
+<h4><span style="color:black">Scalability</span></h4>
+<h4><span style="color:black">Resiliency</span></h4>
+<h4><span style="color:black">Modifiability</span></h4>
+<h4><span style="color:black">Installability</span></h4>
+<h4><span style="color:black">Analysability</span></h4>
+<h4><span style="color:black">Confidentiality</span></h4>
+<h4><span style="color:black">Testability</span></h4>
+</section>
+<section >
+<h3>References</h3>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/azure/architecture/best-practices/auto-scaling">Scaling - Azure Best Practices</a></li>
+<li><a href="https://docs.microsoft.com/en-us/azure/application-gateway/overview">Application Gateway</a></li>
+<li><a href="https://docs.microsoft.com/en-us/azure/architecture/patterns/">Azure Cloud Patterns</a></li>
+<li><a href="https://docs.microsoft.com/en-us/azure/cosmos-db/consistency-levels-tradeoffs">Consistency, availability, and performance tradeoffs</a></li>
+<li><a href="https://docs.microsoft.com/en-us/azure/architecture/framework/resiliency/backup-and-recovery">Backup and disaster recover for Azure applications</a></li>
+<li><a href="https://docs.microsoft.com/en-us/azure/application-gateway/configure-web-app-portal">Configure App Service with Application Gateway</a></li>
+<li><a href="https://docs.microsoft.com/en-us/azure/azure-monitor/overview">Azure Monitor</a></li>
+<li><a href="http://www.patricksoftwareblog.com/how-to-configure-nginx-for-a-flask-web-application/">NGINX with Flask</a></li>
+<li><a href="https://stackshare.io/stackups/gunicorn-vs-microsoft-azure">Gunicorn vs Microsoft Azure</a></li>
+</ul>
 </section>
 
 
