@@ -1,0 +1,4 @@
+[submodule "adunanze"]
+	path = adunanze
+	url = https://github.com/aleanza/adunanze
+	branch = main
